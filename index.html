@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vaibhavi ❤️</title>
+<style>
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',sans-serif;background:url('photo.jpg') no-repeat center/cover;background-size:cover;}
+#stars{position:absolute;width:100%;height:100%;background:url('stars.png') repeat;z-index:0;animation:starTwinkle 60s linear infinite;}
+@keyframes starTwinkle{0%{background-position:0 0;}100%{background-position:10000px 0;}}
+.snowflake{position:absolute;color:white;font-size:clamp(0.8rem,2vw,2rem);user-select:none;pointer-events:none;z-index:0;animation:snowfall linear infinite;}
+@keyframes snowfall{0%{transform:translateY(-10px);}100%{transform:translateY(110vh);}}
+#castle{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80vw;max-width:900px;height:auto;background:url('castle.png') no-repeat center bottom;background-size:contain;z-index:1;animation:castleGlow 6s ease-in-out infinite alternate;filter:drop-shadow(0 0 20px rgba(255,255,255,0.3)) brightness(1.1);}
+@keyframes castleGlow{0%{filter:drop-shadow(0 0 15px rgba(255,255,255,0.2)) brightness(1);}100%{filter:drop-shadow(0 0 25px rgba(255,255,255,0.35)) brightness(1.1);}}
+.fairy{position:absolute;width:clamp(10px,2vw,20px);height:clamp(10px,2vw,20px);background:radial-gradient(circle,white,hotpink);border-radius:50%;box-shadow:0 0 25px 12px hotpink;animation:fairyFly 14s infinite linear;z-index:2;}
+@keyframes fairyFly{0%{transform:translate(5vw,80vh);}25%{transform:translate(80vw,70vh);}50%{transform:translate(60vw,20vh);}75%{transform:translate(20vw,40vh);}100%{transform:translate(5vw,80vh);}}
+#birthdayMsg{position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);padding:clamp(15px,3vw,40px);border-radius:25px;text-align:center;z-index:5;color:white; text-shadow:0 0 clamp(5px,1vw,10px) #ff0000,0 0 clamp(10px,2vw,20px) #ff6600,0 0 clamp(15px,3vw,30px) #ff3300;}
+#birthdayMsg h1,#birthdayMsg h2{font-weight:900;font-size:clamp(2rem,6vw,4rem);}
+#birthdayMsg h2{margin-top:clamp(5px,1vw,10px);font-size:clamp(1.5rem,4vw,2rem);color:#ffd700;}
+.buttons{position:absolute;bottom:clamp(20px,5vw,60px);left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(8px,2vw,12px);z-index:5;}
+button{padding:clamp(8px,2vw,18px) clamp(12px,3vw,25px);border:none;border-radius:25px;font-size:clamp(12px,3vw,18px);color:white;cursor:pointer;font-weight:900;position:relative;overflow:hidden;outline:none;box-shadow:0 0 10px #fff5;transition:transform 0.3s;background: linear-gradient(270deg, #ff0000, #00ff00, #0000ff, #ff0000);background-size:600% 600%;animation:rgbShift 6s ease infinite;}
+button:hover{transform:scale(1.15);}
+@keyframes rgbShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.letter{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:7;overflow:hidden;background:rgba(0,0,0,0.95);}
+.letterContent{background:#111;padding:clamp(20px,4vw,40px);border-radius:20px;color:#fff;max-width:90%;text-align:center;position:relative;animation:pop 0.8s ease forwards;}
+.letterContent h2,.letterContent p{font-weight:900;text-shadow:0 0 5px #ff9800,0 0 10px #ff5722;color:#fff;}
+@keyframes pop{0%{transform:scale(0);}100%{transform:scale(1);}}
+#clock{position:absolute;top:clamp(10px,2vw,20px);right:clamp(10px,2vw,20px);background:rgba(0,0,0,0.7);color:#fff;padding:clamp(8px,2vw,14px) clamp(12px,3vw,20px);border-radius:12px;box-shadow:0 0 15px #fffa;z-index:10;text-align:center;font-family:'Segoe UI',sans-serif;}
+#time{font-size:clamp(1.2rem,4vw,2rem);font-weight:900;letter-spacing:2px;}
+#date{font-size:clamp(0.8rem,2.5vw,1rem);margin-top:3px;letter-spacing:1px;}
+.bells{position:relative;margin-top:5px;}
+.bell{display:inline-block;font-size:clamp(16px,4vw,20px);margin:0 3px;transform:translateY(0);opacity:0;animation:bellIdle 0.5s ease forwards;}
+@keyframes bellRing{0%{transform:rotate(0deg) translateY(0);opacity:1;}25%{transform:rotate(-15deg) translateY(-3px);}50%{transform:rotate(15deg) translateY(-3px);}75%{transform:rotate(-10deg) translateY(-2px);}100%{transform:rotate(0deg) translateY(0);opacity:0;}}
+#fx{position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+<div id="stars"></div>
+<div id="castle"></div>
+<div class="fairy"></div>
+
+<!-- Snowflakes -->
+<script>
+const snowCount = 80;
+for(let i=0;i<snowCount;i++){
+  let span=document.createElement('div');
+  span.className='snowflake';
+  span.style.left=Math.random()*100+'vw';
+  span.style.fontSize=(10+Math.random()*15)+'px';
+  span.style.animationDuration=(10+Math.random()*10)+'s';
+  span.style.opacity=Math.random();
+  span.textContent='❄';
+  document.body.appendChild(span);
+}
+</script>
+
+<div id="birthdayMsg">
+  <h1>🎉 Happy Birthday Vaibhavi! 🎉</h1>
+  <h2>You are <span id="age"></span> old ❤️</h2>
+</div>
+
+<div class="buttons">
+  <button id="btn1">🎂 Cake Letter</button>
+  <button id="btn2">🎈 Balloon Letter</button>
+  <button id="btn3">🕯 Candle Letter</button>
+  <button id="btn4">🌹 Rose Letter</button>
+  <button id="btn5">✨ Magic Letter</button>
+  <button id="btn6">🎉 Confetti Letter</button>
+  <button id="btn7">🎇 Fireworks Letter</button>
+  <button id="btn8">🌈 Rainbow Letter</button>
+  <button id="btn9">📜 Vintage Letter</button>
+  <button id="btn10">💌 Love Letter</button>
+</div>
+
+<!-- Letters -->
+<div id="letter1" class="letter"><div class="letterContent"><h2>Cake Letter 🍰</h2><p>Life is sweeter with you ❤️</p></div></div>
+<div id="letter2" class="letter"><div class="letterContent"><h2>Balloon Letter 🎈</h2><p>May your dreams soar high 💖</p></div></div>
+<div id="letter3" class="letter"><div class="letterContent"><h2>Candle Letter 🕯</h2><p>Shine bright like these candles ✨</p></div></div>
+<div id="letter4" class="letter"><div class="letterContent"><h2>Rose Letter 🌹</h2><p>Sending you love and roses 💐</p></div></div>
+<div id="letter5" class="letter"><div class="letterContent"><h2>Magic Letter ✨</h2><p>Life is full of magic with you 💖</p></div></div>
+<div id="letter6" class="letter"><div class="letterContent"><h2>Confetti Letter 🎉</h2><p>Celebrate every moment 🎊</p></div></div>
+<div id="letter7" class="letter"><div class="letterContent"><h2>Fireworks Letter 🎇</h2><p>Exploding with love 💥</p></div></div>
+<div id="letter8" class="letter"><div class="letterContent"><h2>Rainbow Letter 🌈</h2><p>Colors of happiness 🌸</p></div></div>
+<div id="letter9" class="letter"><div class="letterContent"><h2>Vintage Letter 📜</h2><p>Timeless love ❤️</p></div></div>
+<div id="letter10" class="letter"><div class="letterContent"><h2>Love Letter 💌</h2><p>You are my everything ❤️</p></div></div>
+
+<!-- Clock -->
+<div id="clock">
+  <div id="time">00:00:00</div>
+  <div id="date">01 Jan 2026</div>
+  <div class="bells"><div class="bell" id="bell1">🔔</div><div class="bell" id="bell2">🔔</div></div>
+</div>
+
+<audio id="dingDong" src="https://actions.google.com/sounds/v1/alarms/ding.mp3"></audio>
+
+<script>
+// AGE CALCULATION
+const birthDate = new Date(2008,0,20);
+function calculateFullAge(bDate){
+  const today = new Date();
+  let y = today.getFullYear() - bDate.getFullYear();
+  let m = today.getMonth() - bDate.getMonth();
+  let d = today.getDate() - bDate.getDate();
+  if(d<0){ m--; d += new Date(today.getFullYear(), today.getMonth(),0).getDate();}
+  if(m<0){ y--; m+=12;}
+  return `${y} yrs, ${m} mths, ${d} days`;
+}
+function showBirthdayMessage(){document.getElementById('age').textContent = calculateFullAge(birthDate);}
+showBirthdayMessage();
+setInterval(showBirthdayMessage,1000*60*60);
+
+// BUTTON ANIMATIONS
+function animateLetter(letter){
+  const content=letter.querySelector('.letterContent');
+  content.style.transform='scale(0) rotate(-15deg)';
+  content.style.opacity='0';
+  content.style.transition='all 0.8s ease';
+  letter.style.display='flex';
+  setTimeout(()=>{content.style.transform='scale(1) rotate(0deg)';content.style.opacity='1';},50);
+}
+for(let i=1;i<=10;i++){
+  document.getElementById('btn'+i).onclick=(()=>{let n=i; return ()=>{animateLetter(document.getElementById('letter'+n));}})();
+}
+document.querySelectorAll('.letter').forEach(l=>l.addEventListener('click',e=>{if(e.target===l)l.style.display='none';}));
+
+// CLOCK
+const clockTime=document.getElementById('time');
+const clockDate=document.getElementById('date');
+const ding=document.getElementById('dingDong');
+const bell1=document.getElementById('bell1');
+const bell2=document.getElementById('bell2');
+function updateClock(){
+  const now=new Date();
+  let h=now.getHours(), m=now.getMinutes(), s=now.getSeconds();
+  h=h<10?'0'+h:h; m=m<10?'0'+m:m; s=s<10?'0'+s:s;
+  clockTime.textContent=`${h}:${m}:${s}`;
+  const day=now.getDate()<10?'0'+now.getDate():now.getDate();
+  const monthNames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const month=monthNames[now.getMonth()]; const year=now.getFullYear();
+  clockDate.textContent=`${day} ${month} ${year}`;
+  if(m===0 && s===0){ 
+    ding.play(); 
+    bell1.style.animation="bellRing 2s ease forwards"; 
+    bell2.style.animation="bellRing 2s 0.2s ease forwards"; 
+    setTimeout(()=>{bell1.style.animation=""; bell2.style.animation="";},2100);
+  }
+}
+setInterval(updateClock,1000); 
+updateClock();
+
+// FIREWORKS
+const canvas=document.getElementById("fx");
+const ctx=canvas.getContext("2d");
+function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+let particles=[];
+function createFirework(x,y){
+  for(let i=0;i<200;i++){
+    particles.push({x:x,y:y,vx:(Math.random()-0.5)*8,vy:(Math.random()-0.5)*8,alpha:1,color:`hsl(${Math.random()*360},100%,60%)`});
+  }
+}
+function animateFireworks(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<particles.length;i++){
+    let p=particles[i]; p.x+=p.vx; p.y+=p.vy; p.alpha-=0.01;
+    ctx.fillStyle=`hsla(${Math.random()*360},100%,60%,${p.alpha})`;
+    ctx.beginPath(); ctx.arc(p.x,p.y,3,0,2*Math.PI); ctx.fill();
+  }
+  particles=particles.filter(p=>p.alpha>0);
+  requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+setInterval(()=>{createFirework(Math.random()*canvas.width,Math.random()*canvas.height*0.5)},500);
+</script>
+</body>
+</html>
